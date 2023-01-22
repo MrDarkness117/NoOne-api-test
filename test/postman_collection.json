@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "fbfb00e9-f1f8-4ed9-adb3-6ee8dce7bce9",
+		"name": "CRM API",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Операции с корзиной",
+			"item": [
+				{
+					"name": "cartGet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://{{host_url}}:{{host_port}}/app/rest/v2/services/nl_ShoppingCartService/cartGet?cartId=13b07b32-d539-6783-9366-3846e3519f48",
+							"protocol": "http",
+							"host": [
+								"{{host_url}}"
+							],
+							"port": "{{host_port}}",
+							"path": [
+								"app",
+								"rest",
+								"v2",
+								"services",
+								"nl_ShoppingCartService",
+								"cartGet"
+							],
+							"query": [
+								{
+									"key": "cartId",
+									"value": "13b07b32-d539-6783-9366-3846e3519f48"
+								}
+							]
+						},
+						"description": "Service list"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "OAuth - Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Y2xpZW50OnNlY3JldA=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://{{host_url}}:{{host_port}}/app/rest/v2/oauth/token?grant_type=refresh_token&refresh_token={{refresh_token}}&password=web123",
+					"protocol": "http",
+					"host": [
+						"{{host_url}}"
+					],
+					"port": "{{host_port}}",
+					"path": [
+						"app",
+						"rest",
+						"v2",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{refresh_token}}"
+						},
+						{
+							"key": "password",
+							"value": "web123"
+						}
+					]
+				},
+				"description": "Получение токена по refresh_token"
+			},
+			"response": []
+		},
+		{
+			"name": "OAuth - авторизация",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Y2xpZW50OnNlY3JldA=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://{{host_url}}:{{host_port}}/app/rest/v2/oauth/token?grant_type=password&username=webservice&password=web123",
+					"protocol": "http",
+					"host": [
+						"{{host_url}}"
+					],
+					"port": "{{host_port}}",
+					"path": [
+						"app",
+						"rest",
+						"v2",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "username",
+							"value": "webservice"
+						},
+						{
+							"key": "password",
+							"value": "web123"
+						}
+					]
+				},
+				"description": "Authentication"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host_url",
+			"value": "localhost"
+		},
+		{
+			"key": "host_port",
+			"value": "8080"
+		},
+		{
+			"key": "refresh_token",
+			"value": "21d9607a-9195-411d-9d69-538352c0bac0"
+		},
+		{
+			"key": "card_info",
+			"value": ""
+		}
+	]
+}
