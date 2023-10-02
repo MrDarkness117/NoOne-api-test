@@ -22,8 +22,8 @@ class APIConfig:
             "deviceType": "android",
             "version": "00958",
             "pushID": "push-me-now-2",
-            "login": "m.romantsov@noone.ru",
-            "password": "Mihailo117",
+            "login": "mail@noone.ru",
+            "password": "Password123",
             "cityCode": "77000000000",
             "cityTitle": "Москва"
     }
