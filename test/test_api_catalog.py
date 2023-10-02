@@ -13,35 +13,6 @@ class TestCatalog(APIConfig):
 
     basepath = str(Path.cwd()) + '\\'
 
-    # if os.path.exists(basepath + 'global_params.json'):
-    #     with open(basepath + 'global_params.json', 'r') as f:
-    #         token_params = json.load(f)
-    #         f.close()
-    #         print(token_params)
-    #     print("Got login params")
-    # else:
-    #     try:
-    #         raise Exception("File doesn't exist, please run auth first!")
-    #     except Exception as e:
-    #         print("Running Auth")
-    #         from .test_api_auth import TestAuth
-    #         TestAuth().test_auth()
-    #         if not os.path.exists(basepath + 'global_params.json'):
-    #             raise Exception("Failed to create global_params.json file, see auth method")
-    #         with open("global_params.json", 'r') as f:
-    #             token_params = json.load(f)
-    #             print(token_params)
-    #             f.close()
-    #
-    #
-    # headers = {
-    #     "User-Agent": 'PytestAgent',
-    #     "Content-Type": 'application/json',
-    #     "Connection": 'keep-alive',
-    #     "Accept_Encoding": "gzip, enflate, br",
-    #     'X-API-Auth': f"Bearer {token_params['accessToken']}"
-    # }
-
     categories = [
         'f', 'm', 'k'
     ]
